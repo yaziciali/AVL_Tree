@@ -96,7 +96,7 @@
             }
             
 
-            
+
              gezici.ileri(); //Bir sonraki nodea geç
             } 
 
@@ -113,6 +113,21 @@
         
     }
 
+double DogruKuyrugu::toplamUzunluk(){
+    tuzunluk = 0;
+    DkGezici gezici = this->ilkiniAl();
+
+    while ( gezici.sonrakiVarmi()){
+        gezici.ileri();
+        
+          //  cout << sqrt(pow(gezici.simdiki->x - gezici.simdiki->prev->x,2)+pow(gezici.simdiki->y - gezici.simdiki->prev->y,2)+pow(gezici.simdiki->z - gezici.simdiki->prev->z,2))<< " x1 :"  << gezici.simdiki->x  << " x2 :"  << gezici.simdiki->prev->x << " y1 :"  << gezici.simdiki->y << " y2 :"  << gezici.simdiki->prev->y << " z1 :"  << gezici.simdiki->z << " z2 :"  << gezici.simdiki->prev->z << endl;
+           tuzunluk += sqrt(pow(gezici.simdiki->x - gezici.simdiki->prev->x,2)+pow(gezici.simdiki->y - gezici.simdiki->prev->y,2)+pow(gezici.simdiki->z - gezici.simdiki->prev->z,2));
+
+        
+    }
+
+    return tuzunluk ;
+}
 
 ostream& operator<<(ostream& screen, DogruKuyrugu& noktalar){
     if (noktalar.bosmu()) screen << Error_isEmpty;

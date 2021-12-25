@@ -19,6 +19,7 @@
 #include <iostream>
 
 #include "dogrukuyrugu.hpp"
+#include "avl.hpp"
 #define FILENAME "Noktalar.txt"
 using namespace std;
 
@@ -31,10 +32,11 @@ int main(int argc, char const *argv[])
     int insertIndex = 0 ;
     int delIndex = 0 ;
     string newitem = "";
+    Avl *agac = new Avl();
 
     while (getline(dataFile, line))
     {
-        DogruKuyrugu noktalar;
+        DogruKuyrugu *noktalar = new DogruKuyrugu();
         cout << line << endl ;
         std::stringstream  lineStream(line);
         int value;
@@ -48,18 +50,19 @@ int main(int argc, char const *argv[])
             dindex++;
             if (dindex==3){
                 Nokta *yeni = new Nokta(xyz[0],xyz[1],xyz[2]);
-                noktalar.ekle(yeni);
+                noktalar->ekle(yeni);
                 dindex=0;
                 cout << noktalar << endl ;;
             }
             
         }
+        cout << "TOPLAM UZUNLUK: " << noktalar->toplamUzunluk() << " : " << endl;
         lineNumber++;
-        
+        agac->ekle(agac->kok,  *noktalar);
     }
 
 
-
+agac->postOrder(agac->kok);
 
 
 

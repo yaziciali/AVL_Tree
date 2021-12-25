@@ -2,7 +2,7 @@
 * @file definitions.hpp
 * @description Tanımlamalar dosyası
 * @course BSM 207 - Veri Yapıları - 1. Öğretim A grubu
-* @assignment 1
+* @assignment 2
 * @date 08.11.2021
 * @author Ali YAZICI ali.yazici3@ogr.sakarya.edu.tr
 */

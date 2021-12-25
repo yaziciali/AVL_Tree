@@ -26,11 +26,12 @@ class DkGezici{
 class DogruKuyrugu{
 	private:
 		int sayi;
-        int toplamuzunluk;
+
 		Nokta *kb; // Kuyruk Başlangıcı
 		Nokta *ks; // Kuyruk Sonu
 
 	public:
+         double tuzunluk; // Toplam Uzunluk
 		DogruKuyrugu();
         DogruKuyrugu(Nokta *n);
         ~DogruKuyrugu();
@@ -39,6 +40,7 @@ class DogruKuyrugu{
         DkGezici ilkiniAl();
         DkGezici sonuAl();
 		void ekle(Nokta  *yeninokta);
+        double toplamUzunluk();
         
 
 		friend ostream& operator<<(ostream& screen, DogruKuyrugu& item);

@@ -5,6 +5,9 @@
         "xstring": "cpp",
         "iostream": "cpp",
         "ostream": "cpp",
-        "iterator": "cpp"
+        "iterator": "cpp",
+        "cmath": "cpp",
+        "limits": "cpp",
+        "utility": "cpp"
     }
 }

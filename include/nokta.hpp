@@ -6,8 +6,8 @@
 * @date 08.11.2021
 * @author Ali YAZICI ali.yazici3@ogr.sakarya.edu.tr
 */
-#ifndef NODE_HPP
-#define NODE_HPP
+#ifndef NOKTA_HPP
+#define NOKTA_HPP
 #include <iostream>
 #include <cmath>
 using namespace std;
