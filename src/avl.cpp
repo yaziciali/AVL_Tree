@@ -193,7 +193,6 @@
                 bellektemizle(altDugum->sol);
                 bellektemizle(altDugum->sag);
                 altDugum->veri->bellektemizle();
-                delete altDugum->veri;
                 delete altDugum;
             }
         }

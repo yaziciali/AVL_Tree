@@ -1,0 +1,12 @@
+/**
+* @file benioku.txt
+* @description Uygulama açılışta Noktalar.txt dosyasını okur. 
+*              x,y,z koordinatları verilen noktaları DogruKuyrugu sınıfına kaydeder.
+*              Aralarındaki uzunluğuda ölçerek toplar ve aynı sınıftaki tuzunluk değişkenine kaydeder.
+*               Her bir satırdan oluşan yeni DogruKuyrugu nesnelerini AVL ağacına ekler.
+*               Ve son olarak yeni oluşan bu ağacı postorder metodu ile ekrana gösterir.
+* @course BSM 207 - Veri Yapıları - 1. Öğretim A grubu
+* @assignment 2
+* @date 25.12.2021
+* @author Ali YAZICI ali.yazici3@ogr.sakarya.edu.tr
+*/
