@@ -13,6 +13,7 @@
         this->kb = NULL;
         this->ks = NULL;
         sayi = 0;
+        tuzunluk = 0 ;
     }
 
     DogruKuyrugu::~DogruKuyrugu(){ //Bellek temizliği
@@ -68,12 +69,16 @@
         {
         this->kb = yeninokta;
         this->ks = yeninokta;
+        this->xo = yeninokta->x;
+        this->yo = yeninokta->y;
+        this->zo = yeninokta->z;
+        this->tuzunluk = 0 ;
         sayi = 1 ;
         } else
         {
             DkGezici gezici = this->ilkiniAl();
             while ( gezici.noktaVarmi() ){
-                cout << "yeni_yakinlik: " << yeninokta->orjineyakinlik << " -> simdiki_yakinlik: " << gezici.simdiki->orjineyakinlik << endl;
+            //    cout << "yeni_yakinlik: " << yeninokta->orjineyakinlik << " -> simdiki_yakinlik: " << gezici.simdiki->orjineyakinlik << endl;
             if (yeninokta->orjineyakinlik <= gezici.simdiki->orjineyakinlik)
             {
                 yeninokta->prev = gezici.simdiki->prev;
@@ -108,25 +113,35 @@
 
 
             }
+
+                    // Dosyaya geliş sırasuna göre toplam uzunluk bulma kodu
+                    this->tuzunluk += sqrt(pow(yeninokta->x - this->xo,2)+pow(yeninokta->y - this->yo,2)+pow(yeninokta->z - this->zo,2));
+                    this->xo = yeninokta->x;
+                    this->yo = yeninokta->y;
+                    this->zo = yeninokta->z;
         }
         
         
     }
 
 double DogruKuyrugu::toplamUzunluk(){
-    tuzunluk = 0;
+
+    return tuzunluk ;
+
+/*  // Eski kod, öncelik sırasına göre toplam uzunluk bulma kodu 
+   tuzunluk = 0;
     DkGezici gezici = this->ilkiniAl();
 
     while ( gezici.sonrakiVarmi()){
         gezici.ileri();
         
-          //  cout << sqrt(pow(gezici.simdiki->x - gezici.simdiki->prev->x,2)+pow(gezici.simdiki->y - gezici.simdiki->prev->y,2)+pow(gezici.simdiki->z - gezici.simdiki->prev->z,2))<< " x1 :"  << gezici.simdiki->x  << " x2 :"  << gezici.simdiki->prev->x << " y1 :"  << gezici.simdiki->y << " y2 :"  << gezici.simdiki->prev->y << " z1 :"  << gezici.simdiki->z << " z2 :"  << gezici.simdiki->prev->z << endl;
+           cout << sqrt(pow(gezici.simdiki->x - gezici.simdiki->prev->x,2)+pow(gezici.simdiki->y - gezici.simdiki->prev->y,2)+pow(gezici.simdiki->z - gezici.simdiki->prev->z,2))<< " x1 :"  << gezici.simdiki->x  << " x2 :"  << gezici.simdiki->prev->x << " y1 :"  << gezici.simdiki->y << " y2 :"  << gezici.simdiki->prev->y << " z1 :"  << gezici.simdiki->z << " z2 :"  << gezici.simdiki->prev->z << endl;
            tuzunluk += sqrt(pow(gezici.simdiki->x - gezici.simdiki->prev->x,2)+pow(gezici.simdiki->y - gezici.simdiki->prev->y,2)+pow(gezici.simdiki->z - gezici.simdiki->prev->z,2));
 
         
     }
-
-    return tuzunluk ;
+    return tuzunluk ; */
+    
 }
 
 ostream& operator<<(ostream& screen, DogruKuyrugu& noktalar){
@@ -144,31 +159,3 @@ ostream& operator<<(ostream& screen, DogruKuyrugu& noktalar){
 }
 
 
-    DkGezici::DkGezici(){
-        this->simdiki = NULL;
-    }
-    DkGezici::DkGezici(Nokta *n){
-        this->simdiki = n;
-    }
-    bool DkGezici::noktaVarmi(){
-        return this->simdiki != NULL;
-    }
-    bool DkGezici::sonrakiVarmi(){
-        return this->simdiki->next != NULL;
-    }
-    void DkGezici::ileri(){
-        if(!noktaVarmi()) throw Error_NoItem;
-        this->simdiki = this->simdiki->next;
-    }
-    void DkGezici::geri(){
-        if(!noktaVarmi()) throw Error_NoItem;
-        this->simdiki = this->simdiki->prev;
-    }
-
-     Nokta *DkGezici::sonaGit(){
-         while (sonrakiVarmi())
-         {
-             ileri();
-         }
-         return simdiki;
-     }

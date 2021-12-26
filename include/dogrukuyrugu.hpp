@@ -9,29 +9,21 @@
 #ifndef DOGRUKUYRUGU_HPP
 #define DOGRUKUYRUGU_HPP
 #include "nokta.hpp"
+#include "dkgezici.hpp"
 
-class DkGezici{
-    public:
-    Nokta *simdiki;
-    DkGezici();
-    DkGezici(Nokta *n);
-    bool noktaVarmi() ;
-    bool sonrakiVarmi() ;
-    void ileri();
-    void geri();
-    Nokta *sonaGit();
-
-};
 
 class DogruKuyrugu{
 	private:
 		int sayi;
+        int xo; // Önceki X
+        int yo; // Önceki y
+        int zo; // Önceki z
 
 		Nokta *kb; // Kuyruk Başlangıcı
 		Nokta *ks; // Kuyruk Sonu
 
 	public:
-         double tuzunluk; // Toplam Uzunluk
+        int tuzunluk; // Toplam Uzunluk
 		DogruKuyrugu();
         DogruKuyrugu(Nokta *n);
         ~DogruKuyrugu();

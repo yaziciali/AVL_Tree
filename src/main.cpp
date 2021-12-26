@@ -45,7 +45,7 @@ int main(int argc, char const *argv[])
         // Sayıları teker teker oku
         while(lineStream >> value)
         {
-            cout << value << endl ;
+            //cout << value << endl ;
             xyz[dindex] = value;
             dindex++;
             if (dindex==3){
@@ -56,9 +56,10 @@ int main(int argc, char const *argv[])
             }
             
         }
-        cout << "TOPLAM UZUNLUK: " << noktalar->toplamUzunluk() << " : " << endl;
+        cout << lineNumber << ". satirdaki dogrularin toplam mesafesi: " << noktalar->toplamUzunluk() << "  " << endl;
         lineNumber++;
-        agac->ekle(agac->kok,  *noktalar);
+        agac->ekle(agac->kok,  noktalar);
+        cout << lineNumber << " EKLENDİ: " << *noktalar << "  " << endl;
     }
 
 
