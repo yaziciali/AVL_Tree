@@ -9,6 +9,7 @@
 
 #include "dogrukuyrugu.hpp"
 #include "definitions.hpp"
+#include <iomanip>
     DogruKuyrugu::DogruKuyrugu(){
         this->kb = NULL;
         this->ks = NULL;
@@ -30,6 +31,21 @@
     delete gezici.simdiki;
 
     }
+    
+    void DogruKuyrugu::bellektemizle(){
+        if (this->bosmu()) return;
+
+        DkGezici gezici = this->ilkiniAl();
+
+        do {
+            
+            gezici.ileri();
+            delete gezici.simdiki->prev;
+        } while ( gezici.sonrakiVarmi());
+        delete gezici.simdiki;
+
+    }
+
 
     DogruKuyrugu::DogruKuyrugu(Nokta *n)
     {
@@ -150,7 +166,7 @@ ostream& operator<<(ostream& screen, DogruKuyrugu& noktalar){
     DkGezici gezici = noktalar.ilkiniAl();
 
     while ( gezici.noktaVarmi() ) {
-        screen << gezici.simdiki->orjineyakinlik << " <--> "; 
+        screen << setw(NUMWIDTH) << gezici.simdiki->orjineyakinlik << setw(NUMWIDTH); 
         gezici.ileri(); //Bir sonraki nodea geç
     } 
 

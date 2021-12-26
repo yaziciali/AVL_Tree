@@ -33,7 +33,7 @@ class DogruKuyrugu{
         DkGezici sonuAl();
 		void ekle(Nokta  *yeninokta);
         double toplamUzunluk();
-        
+        void bellektemizle();
 
 		friend ostream& operator<<(ostream& screen, DogruKuyrugu& item);
 

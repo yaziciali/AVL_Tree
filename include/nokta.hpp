@@ -1,9 +1,9 @@
 /**
 * @file nokta.hpp
-* @description Bağıl liste için oluşturulan node yapısı
+* @description Doğru Kuyruğu sınıfı için oluşturulan nokta düğümü
 * @course BSM 207 - Veri Yapıları - 1. Öğretim A grubu
-* @assignment 1
-* @date 08.11.2021
+* @assignment 2
+* @date 25.12.2021
 * @author Ali YAZICI ali.yazici3@ogr.sakarya.edu.tr
 */
 #ifndef NOKTA_HPP

@@ -1,14 +1,13 @@
 /**
 * @file main.cpp
-* @description Uygulama çift yönlü bir bağıl liste oluşturur. Veri.txt dosyasını okur.
-*              Satırlar ekleme için "E(2#Mehmet Can)" formatında ve silme için "S(3) formatında olmalıdır.
-*              Satır başı E ile başlıyor ise ( ile # arasındaki indeks numarasını alır.
-*               # ile ) harfleri arasındaki texti okur. Verilen indekse göre bağıl listeye texti ekler.
-*               Satır başı S ile başlıyorsa ( ve ) harfleri arasındaki indeks numarasını alarak. 
-*               İlgili indeksi bağıl listeden siler. Satırlar bitince listeyi ekranda gösterir.
+* @description Uygulama açılışta Noktalar.txt dosyasını okur. 
+*              x,y,z koordinatları verilen noktaları DogruKuyrugu sınıfına kaydeder.
+*              Aralarındaki uzunluğuda ölçerek toplar ve aynı sınıftaki tuzunluk değişkenine kaydeder.
+*               Her bir satırdan oluşan yeni DogruKuyrugu nesnelerini AVL ağacına ekler.
+*               Ve son olarak yeni oluşan bu ağacı postorder metodu ile ekrana gösterir.
 * @course BSM 207 - Veri Yapıları - 1. Öğretim A grubu
-* @assignment 1
-* @date 08.11.2021
+* @assignment 2
+* @date 25.12.2021
 * @author Ali YAZICI ali.yazici3@ogr.sakarya.edu.tr
 */
 #include <iostream>
@@ -20,7 +19,8 @@
 
 #include "dogrukuyrugu.hpp"
 #include "avl.hpp"
-#define FILENAME "Noktalar.txt"
+#include "definitions.hpp"
+
 using namespace std;
 
 int main(int argc, char const *argv[])
@@ -37,7 +37,7 @@ int main(int argc, char const *argv[])
     while (getline(dataFile, line))
     {
         DogruKuyrugu *noktalar = new DogruKuyrugu();
-        cout << lineNumber << ". SATIR: " << line << endl ;
+        // cout << lineNumber << ". SATIR: " << line << endl ;
         std::stringstream  lineStream(line);
         int value;
         int xyz[3];
@@ -56,19 +56,18 @@ int main(int argc, char const *argv[])
             }
             
         }
-        cout << lineNumber << ". satirdaki dogrularin toplam mesafesi: " << noktalar->toplamUzunluk() << "  " << endl;
+        // cout << lineNumber << ". satirdaki dogrularin toplam mesafesi: " << noktalar->toplamUzunluk() << "  " << endl;
         
         agac->ekle(agac->kok,  noktalar);
-        cout << lineNumber << ". SATIR EKLENDİ: " << *noktalar << "  " << endl;
+        // cout << lineNumber << ". SATIR EKLENDİ: " << *noktalar << "  " << endl;
         lineNumber++;
     }
 
 
 agac->postOrder(agac->kok);
 
-cout << endl << endl ;
-
-agac->yazdir(agac->kok);
+agac->bellektemizle(agac->kok);
+//agac->yazdir(agac->kok);
 
     return 0;
 }
