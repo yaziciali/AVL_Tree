@@ -37,7 +37,7 @@ int main(int argc, char const *argv[])
     while (getline(dataFile, line))
     {
         DogruKuyrugu *noktalar = new DogruKuyrugu();
-        cout << line << endl ;
+        cout << lineNumber << ". SATIR: " << line << endl ;
         std::stringstream  lineStream(line);
         int value;
         int xyz[3];
@@ -52,20 +52,23 @@ int main(int argc, char const *argv[])
                 Nokta *yeni = new Nokta(xyz[0],xyz[1],xyz[2]);
                 noktalar->ekle(yeni);
                 dindex=0;
-                cout << noktalar << endl ;;
+                //cout << noktalar << endl ;;
             }
             
         }
         cout << lineNumber << ". satirdaki dogrularin toplam mesafesi: " << noktalar->toplamUzunluk() << "  " << endl;
-        lineNumber++;
+        
         agac->ekle(agac->kok,  noktalar);
-        cout << lineNumber << " EKLENDİ: " << *noktalar << "  " << endl;
+        cout << lineNumber << ". SATIR EKLENDİ: " << *noktalar << "  " << endl;
+        lineNumber++;
     }
 
 
 agac->postOrder(agac->kok);
 
+cout << endl << endl ;
 
+agac->yazdir(agac->kok);
 
     return 0;
 }

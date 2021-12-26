@@ -31,19 +31,19 @@ class Avl{
 
 
 	public:
-        Dugum *kok;
+        Dugum *kok; // Kök Düğüm
          double tuzunluk; // Toplam Uzunluk
 		Avl();
         Avl(Dugum *n);
         ~Avl();
 
 
-        int ygetir(Dugum  *dugum); //Düğümün yüksekliğini getir ve güncelle
-        Dugum* solCocukIleDegistir(Dugum *altDugum);
-        Dugum* sagCocukIleDegistir(Dugum *altDugum);
+        int ygetir(Dugum  *dugum); //Düğümün güncel yüksekliğini getir
+        Dugum* solCocukIleDegistir(Dugum* &altDugum);
+        Dugum* sagCocukIleDegistir(Dugum* &altDugum);
 		Dugum* ekle(Dugum  *altDugum,  DogruKuyrugu *yeni);
         void postOrder(Dugum *altDugum);
-
+        int yazdir(Dugum *altDugum);
 };
 
 

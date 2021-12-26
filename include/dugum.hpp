@@ -19,6 +19,7 @@ class Dugum{
     Dugum *sol;
     Dugum *sag;
     int yukseklik;
+    int index;
     Dugum  ( DogruKuyrugu *veri, Dugum *sol=NULL, Dugum *sag=NULL);
     bool yaprakmi(); //Yaprak mı?
 };

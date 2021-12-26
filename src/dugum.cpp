@@ -19,5 +19,16 @@ Dugum::Dugum  (DogruKuyrugu *veri, Dugum *sol, Dugum *sag){
 }
 
 bool Dugum::yaprakmi(){
-    if (sol == NULL && sag == NULL) return true;
+
+    if (sol == NULL && sag  == NULL) {
+
+        return true;
+    }  
+    else
+    {
+
+        return false;
+    }
+    
+    
 }

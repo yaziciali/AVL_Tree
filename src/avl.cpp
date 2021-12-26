@@ -38,33 +38,38 @@
                 int solyukseklik = 0 ;
                 int sagyukseklik = 0 ;
 
-                if (dugum->sol != NULL) solyukseklik = ygetir(dugum->sol);
-                if (dugum->sag != NULL) sagyukseklik = ygetir(dugum->sag);
+                solyukseklik = ygetir(dugum->sol);
+                sagyukseklik = ygetir(dugum->sag);
 
-                if (solyukseklik > sagyukseklik) return solyukseklik + 1; 
-                else return sagyukseklik + 1;
+                if (solyukseklik > sagyukseklik) 
+                    return solyukseklik + 1; 
+                else 
+                    return sagyukseklik + 1;
             }
             
         }
 
-        Dugum* Avl::solCocukIleDegistir(Dugum *altDugum){
+         Dugum* Avl::solCocukIleDegistir(Dugum* &altDugum){
             if (altDugum == NULL ) return NULL;
+           // if (altDugum->sol == NULL ) return NULL;
+
             Dugum *tmp = altDugum->sol;
             altDugum->sol = tmp->sag;
             tmp->sag = altDugum;
-            altDugum->yukseklik = ygetir(altDugum);
-            tmp->yukseklik = max(ygetir(tmp->sol),altDugum->yukseklik)+1 ;
+
             return tmp;
 
         }
 
-        Dugum* Avl::sagCocukIleDegistir(Dugum *altDugum){
+        Dugum* Avl::sagCocukIleDegistir(Dugum* &altDugum){
             if (altDugum == NULL ) return NULL;
+           // if (altDugum->sag == NULL ) return NULL;
+
             Dugum *tmp = altDugum->sag;
             altDugum->sag = tmp->sol;
             tmp->sol = altDugum;
-            altDugum->yukseklik = ygetir(altDugum);
-            tmp->yukseklik = max(ygetir(tmp->sag),altDugum->yukseklik)+1 ;
+            
+
             return tmp;
         }
 
@@ -76,51 +81,88 @@
                 altDugum = new Dugum(yeni);
                 dugumsayisi++;
                 if (dugumsayisi == 1 ) this->kok = altDugum;
-
+                altDugum->index = dugumsayisi;
+                //return altDugum;
                 //cout <<" altDugum NULL iken: " << *altDugum->veri << " dugumsayisi " << dugumsayisi << endl;
             } else if (yeni->tuzunluk < altDugum->veri->tuzunluk)
             {
-                 //cout <<" SOLA EKLE: " << yeni->tuzunluk  << " : " << altDugum->veri->tuzunluk << " ; "  <<  altDugum->sol << endl;
-                altDugum->sol = ekle(altDugum->sol,yeni);
+                 cout <<" SOLA EKLE: " << yeni->tuzunluk  << " : " << altDugum->veri->tuzunluk << " ; "  <<  altDugum->sol << endl;
+                 Dugum *tmpsol = ekle(altDugum->sol,yeni);
+                if (tmpsol != NULL) altDugum->sol = tmpsol;
+
                 if ((ygetir(altDugum->sol) - ygetir(altDugum->sag))  == 2 )
                 {
-                    if (yeni->tuzunluk < altDugum->sol->veri->tuzunluk)
+                    Dugum *tmp1 = altDugum;
+
+                    if (yeni->tuzunluk <= altDugum->sol->veri->tuzunluk)
                     {
-                     //   cout <<" Sol cocuk ile değiştir " << endl;
-                        altDugum = solCocukIleDegistir(altDugum);
+
+                        cout <<" Sol cocuk ile değiştir " << endl;
+                        Dugum *tmpsol1 = solCocukIleDegistir(altDugum);
+                        if (tmpsol1 != NULL) altDugum = tmpsol1;
+
+                        
                     } else{
-                     //   cout <<" SAĞ sonra SOL cocuk ile değiştir " << endl;
-                        altDugum->sol = sagCocukIleDegistir(altDugum->sol);
-                        altDugum = solCocukIleDegistir(altDugum);
+                        cout <<" SAĞ sonra SOL cocuk ile değiştir " << endl;
+                        Dugum *tmpsol2 = sagCocukIleDegistir(altDugum->sol);
+                        if (tmpsol2 != NULL) altDugum->sol = tmpsol2;
+                        Dugum *tmpsol3 = solCocukIleDegistir(altDugum);
+                        if (tmpsol3 != NULL) altDugum = tmpsol3;
                     }
-                    
+
+                    if (this->kok == tmp1)
+                    {
+                        cout <<" KOK Degistir: " << endl;
+                        cout <<"eskisi: " << this->kok->veri->tuzunluk  << endl;
+                        this->kok = altDugum;
+                        cout <<"yenisi: " << this->kok->veri->tuzunluk  << endl;
+                    }
                 }
                 
             } else if (yeni->tuzunluk > altDugum->veri->tuzunluk) {
-               // cout <<" SAGA EKLE: " << yeni->tuzunluk  << " : " << altDugum->veri->tuzunluk << " ; "  <<  altDugum->sag << endl;
-                altDugum->sag = ekle(altDugum->sag,yeni);
-                
+                cout <<" SAGA EKLE: " << yeni->tuzunluk  << " : " << altDugum->veri->tuzunluk << " ; "  <<  altDugum->sag << endl;
+                Dugum *tmpsag = ekle(altDugum->sag,yeni);
+                if (tmpsag != NULL) altDugum->sag = tmpsag;
+
                 if ((ygetir(altDugum->sag) - ygetir(altDugum->sol))  == 2 )
                 {
-                    if (yeni->tuzunluk < altDugum->sag->veri->tuzunluk)
+                    Dugum *tmp2 = altDugum;
+                 if (yeni->tuzunluk > altDugum->sag->veri->tuzunluk)
                     {
-                         //cout <<" SAG cocuk ile değiştir " << endl;
-                        altDugum = sagCocukIleDegistir(altDugum);
+                         cout <<" SAG cocuk ile değiştir " << endl;
+                         Dugum *tmpsag1 = sagCocukIleDegistir(altDugum);
+                        if (tmpsag1 != NULL) altDugum = tmpsag1;
                     } else{
-                       // cout <<" SOL sonra SAG cocuk ile değiştir " << endl;
-                        altDugum->sag = solCocukIleDegistir(altDugum->sag);
-                        altDugum = sagCocukIleDegistir(altDugum);
+                        cout <<" SOL sonra SAG cocuk ile değiştir " << endl;
+                        Dugum *tmpsag2 = solCocukIleDegistir(altDugum->sag);
+                        cout <<" 1 " << endl;
+                        if (tmpsag2 != NULL) altDugum->sag = tmpsag2;
+                        cout <<" 2 " << endl;
+                        Dugum *tmpsag3 = sagCocukIleDegistir(altDugum);
+                        cout <<" 3 " << endl;
+                        if (tmpsag3 != NULL) altDugum = tmpsag3;
+                        cout <<" 4 " << endl;
+                    }
+                    
+                    if (this->kok == tmp2) 
+                    {
+                        cout <<" KOK Degistir: " << endl;
+                        cout <<"eskisi: " << this->kok->veri->tuzunluk  << endl;
+                        this->kok = altDugum;
+                        cout <<"yenisi: " << this->kok->veri->tuzunluk  << endl;
                     }
                     
                 }
-            }
+            } 
             
-
-            if (altDugum != NULL ) 
+            
+            cout <<"DUGUM SAYISI: " << dugumsayisi << endl;
+/*             if (altDugum != NULL ) 
             {
+                 cout <<"Hesapsiz Yukseklik: " << altDugum->yukseklik << endl;
                 altDugum->yukseklik = ygetir(altDugum);
-             //    cout <<"Yükseklik: " << altDugum->yukseklik << endl;
-            }
+                 cout <<"Yukseklik: " << altDugum->yukseklik << endl;
+            } */
 
             return altDugum;
             
@@ -132,8 +174,27 @@
             if(altDugum != NULL){
                 postOrder(altDugum->sol);
                 postOrder(altDugum->sag);
-                cout <<"Dugum: " << *altDugum->veri << endl;
+                cout <<"Dugum: " << altDugum->index << " : " << *altDugum->veri << endl;
             }
         }
 
+		int Avl::yazdir(Dugum *altDugum){
+            if(altDugum != NULL){
+                
+
+
+                int tmp = altDugum->veri->tuzunluk ;
+                if (altDugum == this->kok) cout << "KOK: " << tmp << "  " ;
+                else cout << "DUGUM: " << tmp << "  " << endl ;
+                cout << "Yükseklik: " << ygetir(altDugum) << "  " << endl ;
+                cout << "YAPRAK MI: " << altDugum->yaprakmi() << "  " << endl ;
+                cout << "INDEX: " << altDugum->index << "  " << endl ;
+
+                yazdir(altDugum->sol);
+                yazdir(altDugum->sag) ;
+                cout << "-- SAG SOL YAZILDI --" << endl;
+
+                return tmp;
+            }
+        }
 
